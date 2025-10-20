@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<title>Title</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+    /* Reset margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Full screen container with background image */
+    body, html {
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .background {
+      background-image: url('https://images.unsplash.com/photo-1704782672456-e3f4cb9c9fb5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHJvbGV4JTIwd2F0Y2glMjBpbiUyMCUyMGhpZ2glMjByZXNsdXRpb24lMjBpbiUyMGxhbmRzY2FwZXxlbnwwfDB8NHx8fDA%3D&auto=format&fit=crop&q=60&w=500');
+      height: 100vh;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      /* Flex center */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .center-text {
+  color: white;
+  font-size: 6rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  width: 80%;
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+  user-select: none;
+
+  /* Animation */
+  animation: fadeInOut 4s ease-in-out infinite;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* Keyframes for fade in and out */
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Hover effect */
+.center-text:hover {
+  color: #317823;  /* Golden-ish color on hover */
+  transform: scale(1.1); /* Slight zoom */
+  cursor: pointer;
+}
+
+  /* Image hover effect */
+  .about-image {
+      transition: transform 0.3s ease, filter 0.3s ease;
+      border-radius: 10px;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .about-image:hover {
+      transform: scale(1.05) rotate(3deg);
+      filter: brightness(1.1);
+      cursor: pointer;
+    }
+
+    /* Some padding on text */
+    .about-text {
+      padding: 1rem;
+    }
+
+    /* Heading style */
+    .about-heading {
+      text-align: center;
+      margin: 2rem 0;
+      font-weight: 700;
+      font-size: 3rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .collection-section {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .collection-section h2 {
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: #333;
+      letter-spacing: 1px;
+    }
+
+    .watch-card {
+      background: #fff;
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .watch-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .watch-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .watch-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    .wrapper {
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 18px;
+    }
+
+    h1.collection-title{
+      text-align:center;
+      margin-bottom:28px;
+      font-weight:700;
+      letter-spacing:0.2px;
+    }
+
+    /* Card layout */
+    .product-card{
+      background:#fff;
+      border-radius:var(--card-radius);
+      overflow:hidden;
+      border:none;
+      box-shadow:var(--shadow-sm);
+      transition:transform .35s cubic-bezier(.2,.9,.25,1), box-shadow .35s ease;
+      position:relative;
+    }
+
+    .product-card:hover{
+      transform:translateY(-10px) scale(1.01);
+      box-shadow:var(--shadow-lg);
+    }
+
+    /* Image area */
+    .card-media{
+      position:relative;
+      overflow:hidden;
+      height:260px;
+      display:block;
+    }
+
+    .card-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transition: transform .6s cubic-bezier(.2,.9,.25,1);
+    }
+
+    .product-card:hover .card-media img{
+      transform:scale(1.08);
+    }
+
+    /* overlay on image (appears on hover) */
+    .media-overlay{
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,0.0) 10%, rgba(0,0,0,0.45) 100%);
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding:16px;
+      opacity:0;
+      transition: opacity .3s ease, transform .3s ease;
+      transform:translateY(6px);
+    }
+
+    .product-card:hover .media-overlay{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .overlay-actions{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .btn-overlay{
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.18);
+      color:#fff;
+      padding:.45rem .8rem;
+      border-radius:8px;
+      backdrop-filter: blur(4px);
+      transition: background .18s ease, transform .18s ease;
+      font-weight:600;
+      font-size:0.9rem;
+    }
+
+    .btn-overlay:hover{
+      background:rgba(255,255,255,0.18);
+      transform:translateY(-3px);
+    }
+
+    /* Card body */
+    .card-body-custom{
+      padding:16px 18px 20px 18px;
+    }
+
+    .product-title{
+      font-weight:600;
+      font-size:1.03rem;
+      margin:0 0 6px 0;
+      color:#111;
+    }
+
+    .product-sub{
+      font-size:.88rem;
+      color:#6b7280;
+      margin-bottom:10px;
+    }
+
+    .product-price{
+      font-weight:700;
+      color:var(--accent);
+      font-size:1.05rem;
+    }
+
+    .product-meta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .badge-feature{
+      font-size:.78rem;
+      padding:.28rem .5rem;
+      border-radius:999px;
+      background:#eef2ff;
+      color:#3730a3;
+      font-weight:600;
+    }
+
+    /* Fade-in animation for cards with slight stagger using custom property --delay */
+    .fade-card{
+      opacity:0;
+      transform:translateY(18px);
+      animation:fadeUp .6s cubic-bezier(.2,.9,.25,1) forwards;
+      animation-delay:var(--delay, 0s);
+    }
+
+    @keyframes fadeUp{
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* Responsive tweaks */
+    @media (max-width:576px){
+      .card-media{ height:200px; }
+    }
+
+    @media (min-width:992px){
+      .card-media{ height:240px; }
+    }
+
+    :root{
+      --card-radius: 14px;
+      --shadow-sm: 0 6px 18px rgba(17,17,17,0.06);
+      --shadow-lg: 0 18px 40px rgba(17,17,17,0.12);
+      --accent: #0d6efd;
+    }
+
+    .contact-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
+    }
+    .error-msg {
+      color: #dc3545;
+      font-size: 0.9em;
+    }
+
+    .footer {
+      background-color: #0a0a0a; /* Rolex dark */
+      color: #c0b283; /* Rolex gold-like */
+      padding: 40px 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .footer a {
+      color: #c0b283;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    .footer .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-family: 'Georgia', serif;
+    }
+    .footer .social-icons a {
+      font-size: 1.5rem;
+      margin-right: 15px;
+    }
+    .footer .social-icons a:last-child {
+      margin-right: 0;
+    }
+    @media (max-width: 576px) {
+      .footer .footer-logo {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .footer .nav-links,
+      .footer .social-icons {
+        justify-content: center !important;
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-success">
+        <div class="container-fluid">
+          <a class="navbar-brand text-dark fw-bold" href="#">Zephora</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto">  <!-- ms-auto pushes this ul to the right -->
+              <li class="nav-item">
+                <a class="nav-link active fw-bold text-light" aria-current="page" href="#h">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-light" href="#a">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-light" href="#c">Collection</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-light" href="#p">Product</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fw-bold text-light" href="#c">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="background" id="h">
+        <div class="center-text">Luxury</div>
+      </div>
+
+      <div class="container">
+        <h1 class="about-heading text-success">About</h1>
+        <div class="row align-items-center" id="a">
+          <!-- Left text -->
+          <div class="col-md-6 about-text">
+            <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Provident ipsam ab, ex quisquam perspiciatis ut deleniti ea explicabo repudiandae velit sit optio quod fugit delectus, facilis corporis libero quam quidem repellat doloremque dolore. Inventore consectetur illum odio, distinctio odit repudiandae voluptas ipsum magnam enim deserunt? Pariatur impedit laboriosam recusandae similique?
+            </p>
+            <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis nesciunt incidunt nemo numquam odio quis maiores beatae vel ad tenetur!
+            </p>
+          </div>
+    
+          <!-- Right image -->
+          <div class="col-md-6">
+            <img 
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDku3uEl2mFs2HsJvgQFslKITAfU0mI41yzA&s" alt="About Image" class="about-image"/>
+          </div>
+        </div>
+      </div>
+
+
+                              <!-- collection -->
+      <h1 class="about-heading text-success">Collection</h1>
+      <section class="collection-section" id="c">
+        <div class="container">
+          <h2>Exclusive Watch <span class="badge text-dark bg-success"> Collections</span></h2>
+          <div class="row g-4">
+            <!-- Watch 1 -->
+            <div class="col-md-6 col-lg-3 fade-in">
+              <div class="card watch-card bg-dark">
+                <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Q2xhc3NpYyUyMFNpbHZlciUyMHdhdGNofGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" alt="Watch 1">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Classic Silver</h5>
+                  
+                </div>
+              </div>
+            </div>
+    
+            <!-- Watch 2 -->
+            <div class="col-md-6 col-lg-3 fade-in" style="animation-delay:0.1s;">
+              <div class="card watch-card bg-dark">
+                <img src="https://images.unsplash.com/photo-1612817159450-08a180df028b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8RWxlZ2FudCUyMEJyb3duJTIwd2F0Y2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Watch 2">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Elegant Brown</h5>
+                  
+                </div>
+              </div>
+            </div>
+    
+            <!-- Watch 3 -->
+            <div class="col-md-6 col-lg-3 fade-in" style="animation-delay:0.2s;">
+              <div class="card watch-card bg-dark">
+                <img src="https://images.unsplash.com/photo-1630243286373-b3e295683fc7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fEdvbGRlbiUyMEhlcml0YWdlJTIwd2F0Y2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Watch 3">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Golden Heritage</h5>
+                  
+                </div>
+              </div>
+            </div>
+    
+            <!-- Watch 4 -->
+            <div class="col-md-6 col-lg-3 fade-in" style="animation-delay:0.3s;">
+              <div class="card watch-card bg-dark">
+                <img src="https://images.unsplash.com/photo-1652897979790-3e6ece97c8ab?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8TWlkbmlnaHQlMjBCbGFjayUyMHdhdGNofGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" alt="Watch 4">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Midnight Black</h5>
+                 
+                </div>
+              </div>
+            </div>
+    
+            <!-- Watch 5 -->
+            <div class="col-md-6 col-lg-3 fade-in" style="animation-delay:0.4s;">
+              <div class="card watch-card bg-dark">
+                <img src="https://images.unsplash.com/photo-1677769235840-32212e59970f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8T2NlYW4lMjBCbHVlJTIwd2F0Y2hlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" alt="Watch 5">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Ocean Blue</h5>
+                  
+                </div>
+              </div>
+            </div>
+    
+            <!-- Watch 6 -->
+            <div class="col-md-6 col-lg-3 fade-in" style="animation-delay:0.5s;">
+              <div class="card watch-card bg-dark">
+                <img src="https://images.unsplash.com/photo-1622554058284-478e676df3ce?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8TW9kZXJuJTIwTWluaW1hbCUyMHdhdGNoZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Watch 6">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Modern Minimal</h5>
+                  
+                </div>
+              </div>
+            </div>
+    
+            <!-- Watch 7 -->
+            <div class="col-md-6 col-lg-3 fade-in" style="animation-delay:0.6s;">
+              <div class="card watch-card bg-dark">
+                <img src="https://images.unsplash.com/photo-1636719240003-b05adf828583?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Um9zZSUyMEdvbGQlMjB3YXRjaGVzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" alt="Watch 7">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Rose Gold</h5>
+                  
+                </div>
+              </div>
+            </div>
+    
+            <!-- Watch 8 -->
+            <div class="col-md-6 col-lg-3 fade-in" style="animation-delay:0.7s;">
+              <div class="card watch-card bg-dark">
+                <img src="https://images.unsplash.com/photo-1634113709155-5c2756711384?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fFN0ZWVsJTIwQ2hyb25vJTIwd2F0Y2hlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" alt="Watch 8">
+                <div class="card-body">
+                  <h5 class="card-title text-success">Steel Chrono</h5>
+
+                </div>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+      </section>
+
+
+                       <!-- product -->
+      <h1 class="about-heading text-success">Products</h1>
+      <div class="wrapper" id="p">
+    <h2 class="collection-title text-center fw-bold">This is for you</h2>
+
+    <div class="row g-4">
+      <!-- Card 1 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card fade-card" style="--delay:0s;">
+          <a class="card-media" href="#" aria-label="Royal Silver - view">
+            <img src="https://images.unsplash.com/photo-1758071348980-d1eed770f34f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Um95YWwlMjBTaWx2ZXIlMjB3YXRjaHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&q=60&w=600" alt="Royal Silver">
+            <div class="media-overlay">
+              <div class="overlay-actions">
+                <button class="btn-overlay">View</button>
+                <button class="btn-overlay">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          <div class="card-body-custom bg-dark">
+            <h3 class="product-title text-light">Royal Silver</h3>
+            <p class="product-sub text-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae.</p>
+            <div class="product-meta">
+              <div class="product-price">$349</div>
+              <div class="badge-feature">Automatic</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card fade-card" style="--delay:0.05s;">
+          <a class="card-media" href="#" aria-label="Deep Blue - view">
+            <img src="https://media.istockphoto.com/id/180844253/photo/wrist-watch.webp?a=1&b=1&s=612x612&w=0&k=20&c=zQuStPv6hmyWtrEi92cXoBEI6_zSBDpo8KAJAC35Bes=" alt="Deep Blue">
+            <div class="media-overlay">
+              <div class="overlay-actions">
+                <button class="btn-overlay">View</button>
+                <button class="btn-overlay">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          <div class="card-body-custom bg-dark">
+            <h3 class="product-title text-light">Deep Blue</h3>
+            <p class="product-sub text-light">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <div class="product-meta">
+              <div class="product-price">$279</div>
+              <div class="badge-feature">Swiss Style</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card fade-card" style="--delay:0.1s;">
+          <a class="card-media" href="#" aria-label="White Roman Classic - view">
+            <img src="https://images.unsplash.com/photo-1615860756652-d1efbcb5d784?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fFdoaXRlJTIwUm9tYW4lMjBDbGFzc2ljJTIwd2F0Y2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="White Roman Classic">
+            <div class="media-overlay">
+              <div class="overlay-actions">
+                <button class="btn-overlay">View</button>
+                <button class="btn-overlay">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          <div class="card-body-custom bg-dark">
+            <h3 class="product-title text-light">White Roman Classic</h3>
+            <p class="product-sub text-light">Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+            <div class="product-meta">
+              <div class="product-price">$199</div>
+              <div class="badge-feature">Leather</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card fade-card" style="--delay:0.15s;">
+          <a class="card-media" href="#" aria-label="Moonphase Elite - view">
+            <img src="https://images.unsplash.com/photo-1674208898026-3bca85c5b484?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8TW9vbnBoYXNlJTIwRWxpdGUlMjB3YXRjaGVzfGVufDB8fDB8fHww&auto=format&fit=crop&q=60&w=600" alt="Moonphase Elite">
+            <div class="media-overlay">
+              <div class="overlay-actions">
+                <button class="btn-overlay">View</button>
+                <button class="btn-overlay">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          <div class="card-body-custom bg-dark">
+            <h3 class="product-title text-light">Moonphase Elite</h3>
+            <p class="product-sub text-light">Mauris sed diam eget risus varius blandit sit amet non magna.</p>
+            <div class="product-meta">
+              <div class="product-price">$429</div>
+              <div class="badge-feature">Complication</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card fade-card" style="--delay:0.2s;">
+          <a class="card-media" href="#" aria-label="Ice Blue Cocktail - view">
+            <img src="https://media.istockphoto.com/id/172206076/photo/frozen-time.webp?a=1&b=1&s=612x612&w=0&k=20&c=-xVepOO4BCtCxhWNTvEKOGjeOMTVOM2Hef8XlwGUnXs=" alt="Ice Blue Cocktail">
+            <div class="media-overlay">
+              <div class="overlay-actions">
+                <button class="btn-overlay">View</button>
+                <button class="btn-overlay">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          <div class="card-body-custom bg-dark">
+            <h3 class="product-title text-light">Ice Blue Cocktail</h3>
+            <p class="product-sub text-light">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+            <div class="product-meta">
+              <div class="product-price">$229</div>
+              <div class="badge-feature">Dress</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card fade-card" style="--delay:0.25s;">
+          <a class="card-media" href="#" aria-label="Titan Chronograph - view">
+            <img src="https://images.unsplash.com/photo-1625456767799-dd642223737d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8VGl0YW4lMjBDaHJvbm9ncmFwaCUyMHdhdGNoZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Titan Chronograph">
+            <div class="media-overlay">
+              <div class="overlay-actions">
+                <button class="btn-overlay">View</button>
+                <button class="btn-overlay">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          <div class="card-body-custom bg-dark">
+            <h3 class="product-title text-light">Titan Chronograph</h3>
+            <p class="product-sub text-light">Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis.</p>
+            <div class="product-meta">
+              <div class="product-price">$315</div>
+              <div class="badge-feature">Chrono</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card fade-card" style="--delay:0.3s;">
+          <a class="card-media" href="#" aria-label="Golden Horizon - view">
+            <img src="https://images.unsplash.com/photo-1739501373873-87b3bfedc2f1?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8R29sZGVuJTIwSG9yaXpvbiUyMHdhdGNoZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Golden Horizon">
+            <div class="media-overlay">
+              <div class="overlay-actions">
+                <button class="btn-overlay">View</button>
+                <button class="btn-overlay">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          <div class="card-body-custom bg-dark">
+            <h3 class="product-title text-light">Golden Horizon</h3>
+            <p class="product-sub text-light">Donec sed odio duis mollis, est non commodo luctus, nisi erat porttitor.</p>
+            <div class="product-meta">
+              <div class="product-price">$399</div>
+              <div class="badge-feature">Two-tone</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="product-card fade-card" style="--delay:0.35s;">
+          <a class="card-media" href="#" aria-label="Shadow Eclipse - view">
+            <img src="https://images.unsplash.com/photo-1613745699142-b320892d6417?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8U2hhZG93JTIwJTIwd2F0Y2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600" alt="Shadow Eclipse">
+            <div class="media-overlay">
+              <div class="overlay-actions">
+                <button class="btn-overlay">View</button>
+                <button class="btn-overlay">Add to Cart</button>
+              </div>
+            </div>
+          </a>
+          <div class="card-body-custom bg-dark">
+            <h3 class="product-title text-light">Shadow Eclipse</h3>
+            <p class="product-sub text-light">Vestibulum id ligula porta felis euismod semper. Maecenas faucibus mollis.</p>
+            <div class="product-meta">
+              <div class="product-price">$259</div>
+              <div class="badge-feature">Minimal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+                                   <!-- contact -->
+  <h1 class="mb-4 text-center text-success fw-bold" >Contact Us</h1>
+  <div class="contact-form bg-dark" id="c">
+    <form id="contactForm" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label text-light">Name <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" id="name" placeholder="Your name" required />
+        <div class="error-msg" id="nameError"></div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="email" class="form-label text-light">Email <span class="text-danger">*</span></label>
+        <input type="email" class="form-control" id="email" placeholder="name@example.com" required />
+        <div class="error-msg" id="emailError"></div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="subject" class="form-label text-light">Subject</label>
+        <input type="text" class="form-control" id="subject" placeholder="Subject (optional)" />
+      </div>
+  
+      <div class="mb-3">
+        <label for="message" class="form-label text-light">Message <span class="text-danger">*</span></label>
+        <textarea class="form-control" id="message" rows="5" placeholder="Write your message here..." required></textarea>
+        <div class="error-msg" id="messageError"></div>
+      </div>
+  
+      <button type="submit" class="btn btn-primary w-100">Send Message</button>
+    </form>
+    <div id="formMessage" class="mt-3"></div>
+  </div>
+
+
+                        <!-- footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row align-items-center text-md-start text-center">
+        
+        <!-- Logo -->
+        <div class="col-md-3 mb-3 mb-md-0">
+          <div class="footer-logo">ZEPHORA</div>
+        </div>
+  
+        <!-- Navigation Links -->
+        <div class="col-md-5 mb-3 mb-md-0">
+          <ul class="nav nav-links justify-content-center justify-content-md-start">
+            <li class="nav-item">
+              <a href="#" class="nav-link px-2">Watches</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link px-2">Collections</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link px-2">Stores</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link px-2">Customer Service</a>
+            </li>
+          </ul>
+        </div>
+  
+        <!-- Social Icons -->
+        <div class="col-md-4">
+          <div class="d-flex justify-content-center justify-content-md-end social-icons">
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Copyright -->
+      <div class="row mt-4">
+        <div class="col text-center" style="font-size: 0.9rem; color: #777;">
+          &copy; 2025 Zephora SA. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  
+    
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Clear previous errors and message
+    document.getElementById('nameError').textContent = '';
+    document.getElementById('emailError').textContent = '';
+    document.getElementById('messageError').textContent = '';
+    document.getElementById('formMessage').textContent = '';
+
+    // Get form values
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    let valid = true;
+
+    // Validate name
+    if (name === '') {
+      document.getElementById('nameError').textContent = 'Please enter your name.';
+      valid = false;
+    }
+
+    // Validate email with simple regex
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === '') {
+      document.getElementById('emailError').textContent = 'Please enter your email.';
+      valid = false;
+    } else if (!emailPattern.test(email)) {
+      document.getElementById('emailError').textContent = 'Please enter a valid email.';
+      valid = false;
+    }
+
+    // Validate message
+    if (message === '') {
+      document.getElementById('messageError').textContent = 'Please enter your message.';
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    // If valid, show success message (In real scenario, submit to server)
+    document.getElementById('formMessage').textContent = 'Thank you for contacting us, ' + name + '!';
+    document.getElementById('formMessage').className = 'alert alert-success';
+
+    // Reset form
+    this.reset();
+  });
+</script>
+</body>
+</html>
